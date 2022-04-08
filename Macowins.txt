@@ -1,1 +1,52 @@
-// //
+
+// Prendas
+class Prenda {
+
+    const property tipo;
+    const property precioBase;
+    method precio {};
+}
+
+class Nuevas inherits Prenda {}
+
+Class Promocion inherits Prendda{
+    var property descuento;
+    override method precio () = (self.precioBase() - self.descuento()).max(0);
+}
+
+class Liquidacion inherits Prenda {
+    override method precio () = self.precioBase() * o.5;
+}
+
+
+// venta
+
+class Venta {
+    const property prendasVendidas = {};
+    const property  fechaDeVenta;
+    method cantVendida = self.prendasVendidas().lenght();
+    method importe () = cantVendida.sum { prenda => prenda.precio()}
+}
+
+class VentaEfectivo inherits venta { }
+
+class VentaTarjeta inherits venta {
+const property cantCuotas;
+const property coeficiente;
+method importe() = {
+const recargo = self.cantCuotas() * self.coeficiente() + self.cantVendida.sum{prenda=> prenda.precio() * 0,01};
+return super() + recargo; // busca importe en la superclase venta y le suma el recargo de la subclase VentaTarjeta
+
+}}
+
+// Local
+
+class Local {
+var property ventas = [];
+method ventasDiarias(fecha) = self.ventas.filtrer { venta => venta.fecha() === fecha};
+method valorDeVentaDiaria(fecha){
+    const ventasPorDia = self.ventasDiarias(fecha);
+    return ventasPorDia.sum(venta => venta.importe())
+}
+
+}
